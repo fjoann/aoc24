@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"fmt"
 	"log"
 	"os"
 	"sort"
@@ -27,6 +28,7 @@ func main() {
 	groupOneList := buildList(records, 0)
 	groupTwoList := buildList(records, 1)
 
+	// Part 1: total distance
 	var totalDistance int
 
 	for i := 0; i < len(groupOneList); i++ {
@@ -34,7 +36,25 @@ func main() {
 		totalDistance += elementDistance
 	}
 
-	log.Println(totalDistance)
+	fmt.Printf("Total distance: %d\n", totalDistance)
+
+	// Part 2: similarity score
+	var similarityScore int
+
+	for _, g1Val := range groupOneList {
+		g2Count := 0
+
+		for _, g2Val := range groupTwoList {
+			if g1Val == g2Val {
+				g2Count++
+			}
+		}
+
+		elementSimilarity := g1Val * g2Count
+		similarityScore += elementSimilarity
+	}
+
+	fmt.Printf("Similarity score: %d\n", similarityScore)
 }
 
 func buildList(records [][]string, colIdx int) []int {
