@@ -7,6 +7,8 @@ import (
 	"os"
 	"sort"
 	"strconv"
+
+	"github.com/fjoann/aoc24/aoc"
 )
 
 func main() {
@@ -32,7 +34,7 @@ func main() {
 	var totalDistance int
 
 	for i := 0; i < len(groupOneList); i++ {
-		elementDistance := abs(groupOneList[i] - groupTwoList[i])
+		elementDistance := aoc.AbsInt(groupOneList[i] - groupTwoList[i])
 		totalDistance += elementDistance
 	}
 
@@ -71,11 +73,4 @@ func buildList(records [][]string, colIdx int) []int {
 	sort.Ints(list)
 
 	return list
-}
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }
